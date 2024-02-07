@@ -1,0 +1,48 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<!---Coding By CoderGirl | www.codinglabweb.com--->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--<title>Login & Registration Form | CoderGirl</title>-->
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="{% static 'styles/unique.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="registration form">
+      <header>Make Your room Open Source</header>
+      <form action="{% url 'test' %}" method="POST">
+        {% csrf_token %}
+        <h2 id="textid">Enter The title</h2>
+        {{ form.title }}
+        <h2 id="textid">Enter The  Room Details ( Write the description what your room focuses on )</h2>
+        {{ form.desc }}
+        <h2 id="textid">Room Arrangement Topic</h2>
+        {{ form.topic }}
+        <h2 id="textid">Room Code</h2>
+        {{ form.code }}
+        <h2 id="textid">Join Link</h2>
+        {{ form.link }}
+        <!-- <input type="text" placeholder="Enter your Room name" name="room_name">
+        <textarea cols="30" rows="10" placeholder="Enter your Room Details ( Write the description what your room focuses on )" name="objective"></textarea>
+        <input type="text" placeholder="Room Arrangement Topic" name="topic">
+        <input type="text" placeholder="Room Code" name="code">
+        <input type="password" placeholder="Join Link" name="link"> -->
+        <input type="submit" class="button" value="Make This Open Room">
+        <center>
+          {% if error %}
+          <p style="color: red;">{{ error }}</p>
+          {% endif %}
+        </center>
+
+      </form>
+     
+    </div>
+  </div>
+</body>
+</html>

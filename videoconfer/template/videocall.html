@@ -1,0 +1,215 @@
+<!-- <html>
+{% load static %}
+<head>
+    
+    <link rel="stylesheet" href="{% static 'styles/unique.css' %}">
+    <style>
+        #root {
+            width: 100vw;
+            height: 100vh;
+            }
+    </style>
+</head>
+
+
+<body>
+    <div id="root"></div>
+
+        <div class="container">
+          <div class="registration form">
+            <header>Make Your room Open Source</header>
+            <h5></h5>
+            <form id="post-form">
+              {% csrf_token %}
+             
+              <input type="text" placeholder="Enter your Room name" id="room_name" name="room_name">
+              <textarea cols="30" rows="10" placeholder="Enter your Room Details ( Write the description what your room focuses on )" id="objective" name="objective"></textarea>
+              <input type="text" placeholder="Room Arrangement Topic" id="topic" name="topic">
+              <input type="text" placeholder="Room Code" id="code" name="code">
+              <input type="password" placeholder="Join Link" id="link" name="link">
+              <input type="submit" class="button" value="Make This Open Room">
+              <button type="submit" class="button">Submit</button>
+              <center>
+                {% if error %}
+                <p style="color: red;">{{ error }}</p>
+                {% endif %}
+              </center>
+      
+            </form>
+           
+          </div>
+        </div>
+</body>
+<script type="text/javascript">
+    $(document).on('submit', '#post-form', function (e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '/create',
+            data: {
+                room_name: $('#room_name').val(),
+                desc: $('#objective').val(),
+                topic: $('#topic').val(),
+                code: $('#code').val(),
+                link: $('#link').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function (data){
+                ("h5").html(data)
+            }
+
+        })
+    })
+
+</script>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+window.onload = function () {
+    function getUrlParams(url) {
+        let urlStr = url.split('?')[1];
+        const urlSearchParams = new URLSearchParams(urlStr);
+        const result = Object.fromEntries(urlSearchParams.entries());
+        return result;
+    }
+
+
+        // Generate a Token by calling a method.
+        // @param 1: appID
+        // @param 2: serverSecret
+        // @param 3: Room ID
+        // @param 4: User ID
+        // @param 5: Username
+    const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+    const userID = Math.floor(Math.random() * 10000) + "";
+    const userName = "{{name}}"
+    const appID = 1600760094;
+    const serverSecret = "83edf206a8f928d05d78487ebc7987fa";
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+    
+        const zp = ZegoUIKitPrebuilt.create(kitToken);
+        zp.joinRoom({
+            container: document.querySelector("#root"),
+            sharedLinks: [{
+                name: 'Personal link',
+                url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+            }],
+            scenario: {
+                mode: ZegoUIKitPrebuilt.VideoConference,
+            },
+                
+           	turnOnMicrophoneWhenJoining: false,
+           	turnOnCameraWhenJoining: false,
+           	showMyCameraToggleButton: true,
+           	showMyMicrophoneToggleButton: true,
+           	showAudioVideoSettingsButton: true,
+           	showScreenSharingButton: true,
+           	showTextChat: true,
+           	showUserList: true,
+           	maxUsers: 50,
+           	layout: "Grid",
+           	showLayoutButton: true,
+         
+            });
+}
+</script>
+
+</html>
+
+
+ -->
+
+<html>
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'styles/unique.css' %}">
+    <style>
+        #root {
+            width: 100vw;
+            height: 100vh;
+            }
+    </style>
+</head>
+
+
+<body>
+    <div id="root"></div>
+
+    <div class="container">
+      <div class="registration form">
+        <header>Make Your room Open Source</header>
+        <h5></h5>
+        <form id="post-form">
+          {% csrf_token %}
+         
+          <input type="text" placeholder="Enter your Room name" id="room_name" name="room_name">
+          <textarea cols="30" rows="10" placeholder="Enter your Room Details ( Write the description what your room focuses on )" id="objective" name="objective"></textarea>
+          <input type="text" placeholder="Room Arrangement Topic" id="topic" name="topic">
+          <input type="text" placeholder="Room Code" id="code" name="code">
+          <input type="password" placeholder="Join Link" id="link" name="link">
+          <input type="submit" class="button" value="Make This Open Room">
+          <button type="submit" class="button">Submit</button>
+          <center>
+            {% if error %}
+            <p style="color: red;">{{ error }}</p>
+            {% endif %}
+          </center>
+  
+        </form>
+       
+      </div>
+    </div>
+</body>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+window.onload = function () {
+    function getUrlParams(url) {
+        let urlStr = url.split('?')[1];
+        const urlSearchParams = new URLSearchParams(urlStr);
+        const result = Object.fromEntries(urlSearchParams.entries());
+        return result;
+    }
+
+
+        // Generate a Token by calling a method.
+        // @param 1: appID
+        // @param 2: serverSecret
+        // @param 3: Room ID
+        // @param 4: User ID
+        // @param 5: Username
+    const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+    const userID = Math.floor(Math.random() * 10000) + "";
+    const userName = "userName" + userID;
+    const appID = 346786775;
+    const serverSecret = "37e873f91f78765b2cdb14344e2f108b";
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+    
+        const zp = ZegoUIKitPrebuilt.create(kitToken);
+        zp.joinRoom({
+            container: document.querySelector("#root"),
+            sharedLinks: [{
+                name: 'Personal link',
+                url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+            }],
+            scenario: {
+                mode: ZegoUIKitPrebuilt.VideoConference,
+            },
+                
+           	turnOnMicrophoneWhenJoining: true,
+           	turnOnCameraWhenJoining: true,
+           	showMyCameraToggleButton: true,
+           	showMyMicrophoneToggleButton: true,
+           	showAudioVideoSettingsButton: true,
+           	showScreenSharingButton: true,
+           	showTextChat: true,
+           	showUserList: true,
+           	maxUsers: 50,
+           	layout: "Grid",
+           	showLayoutButton: true,
+         
+            });
+}
+</script>
+
+</html>
